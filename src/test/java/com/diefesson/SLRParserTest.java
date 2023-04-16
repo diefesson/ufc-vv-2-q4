@@ -4,10 +4,11 @@ import static com.diefesson.difcomp.lexer.CommonTokens.END;
 import static com.diefesson.difcomp.samples.ExpressionGrammar.expressionGrammar;
 import static com.diefesson.difcomp.samples.ExpressionTokens.CONST_VALUE;
 import static com.diefesson.difcomp.samples.ExpressionTokens.OP_ADD;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 import java.util.List;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import com.diefesson.difcomp.error.GrammarException;
 import com.diefesson.difcomp.error.LexerException;
@@ -23,14 +24,16 @@ public class SLRParserTest {
 
     @Test
     public void slrParserTest() throws GrammarException, LexerException, ParserException {
-        Grammar grammar = expressionGrammar();
-        TokenSource tokens = ListTokenSource.fromTokenTypes(
-                List.of(CONST_VALUE, OP_ADD, CONST_VALUE, END));
-        SLRParser parser = new SLRParser(grammar, tokens);
-        Action action;
-        do {
-            action = parser.cycle();
-        } while (action.type != ActionType.ACCEPT);
+        assertAll(() -> {
+            Grammar grammar = expressionGrammar();
+            TokenSource tokens = ListTokenSource.fromTokenTypes(
+                    List.of(CONST_VALUE, OP_ADD, CONST_VALUE, END));
+            SLRParser parser = new SLRParser(grammar, tokens);
+            Action action;
+            do {
+                action = parser.cycle();
+            } while (action.type != ActionType.ACCEPT);
+        });
     }
 
 }

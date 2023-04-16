@@ -1,3 +1,7 @@
+# Atenção: prática de Verificação e Validação
+
+Fork de [Difcomp](https://github.com/diefesson/difcomp) usada para prática de instalação de ferramentas da disciplina de VV.
+
 # Analisador Léxico e Sintático Difcomp
 
 Projeto realizado no período 2022.1 para a disciplina de Compiladores e Linguagens de Programação sob a supervisão da professora Lisieux Andrade.

@@ -12,11 +12,11 @@ import static com.diefesson.difcomp.samples.NumberVariables.A;
 import static com.diefesson.difcomp.samples.NumberVariables.B;
 import static com.diefesson.difcomp.samples.NumberVariables.C;
 import static com.diefesson.difcomp.samples.NumberVariables.S;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Set;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import com.diefesson.difcomp.error.GrammarException;
 import com.diefesson.difcomp.grammar.FirstSets;

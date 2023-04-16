@@ -2,18 +2,19 @@ package com.diefesson;
 
 import static com.diefesson.difcomp.rustlike.RLGrammar.rlGrammar;
 import static java.util.stream.Collectors.joining;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import java.util.List;
+
+import org.junit.jupiter.api.Test;
 
 import com.diefesson.difcomp.error.GrammarException;
 import com.diefesson.difcomp.parser.Action;
 import com.diefesson.difcomp.parser.SLRKey;
 import com.diefesson.difcomp.parser.SLRTable;
 import com.diefesson.difcomp.rustlike.RLTokens;
-
-import org.junit.Test;
 
 public class RustLikeTest {
 
@@ -24,16 +25,15 @@ public class RustLikeTest {
             for (int j = i + 1; j < tts.length; j++) {
                 RLTokens tti = tts[i];
                 RLTokens ttj = tts[j];
-                assertNotEquals("%s and %s have conflicting ids".formatted(tti, ttj),
-                        tti.id,
-                        ttj.id);
+                assertNotEquals(tti.id, ttj.id,
+                        "%s and %s have conflicting ids".formatted(tti, ttj));
             }
         }
     }
 
     @Test
     public void grammarBuild() throws GrammarException {
-        rlGrammar();
+        assertAll(() -> rlGrammar());
     }
 
     @Test
@@ -41,10 +41,8 @@ public class RustLikeTest {
         SLRTable table = SLRTable.compute(rlGrammar());
         for (SLRKey key : table.keys()) {
             List<Action> actions = table.getList(key);
-            assertEquals(
-                    "Conflict: " + actions.stream().map(Object::toString).collect(joining(", ")),
-                    1,
-                    actions.size());
+            assertEquals(1, actions.size(),
+                    "Conflict: " + actions.stream().map(Object::toString).collect(joining(", ")));
         }
     }
 }
